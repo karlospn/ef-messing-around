@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Books.Entities;
 using Books.Web.DataContext;
@@ -13,9 +14,10 @@ namespace Books.Web.Controllers
         private BookContext db = new BookContext();
 
         // GET: Books
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Books.ToList());
+            var books = await db.Books.ToListAsync();
+            return View(books);
         }
 
         // GET: Books/Details/5
