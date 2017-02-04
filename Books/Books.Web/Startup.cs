@@ -10,5 +10,6 @@ namespace Books.Web
         {
             ConfigureAuth(app);
         }
+
     }
 }
