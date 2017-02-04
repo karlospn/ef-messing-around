@@ -224,11 +224,19 @@
     <Compile Include="DataContext\BookMigrations\201702041856102_InitialCreation.Designer.cs">
       <DependentUpon>201702041856102_InitialCreation.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContext\BookMigrations\201702042003061_librarySchema.cs" />
+    <Compile Include="DataContext\BookMigrations\201702042003061_librarySchema.Designer.cs">
+      <DependentUpon>201702042003061_librarySchema.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\BookMigrations\Configuration.cs" />
     <Compile Include="DataContext\IdentityContext.cs" />
     <Compile Include="DataContext\IdentityMigrations\201702041855563_InitialCreation.cs" />
     <Compile Include="DataContext\IdentityMigrations\201702041855563_InitialCreation.Designer.cs">
       <DependentUpon>201702041855563_InitialCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\IdentityMigrations\201702042002444_identitySchema.cs" />
+    <Compile Include="DataContext\IdentityMigrations\201702042002444_identitySchema.Designer.cs">
+      <DependentUpon>201702042002444_identitySchema.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContext\IdentityMigrations\Configuration.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
@@ -328,8 +336,14 @@
     <EmbeddedResource Include="DataContext\BookMigrations\201702041856102_InitialCreation.resx">
       <DependentUpon>201702041856102_InitialCreation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataContext\BookMigrations\201702042003061_librarySchema.resx">
+      <DependentUpon>201702042003061_librarySchema.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataContext\IdentityMigrations\201702041855563_InitialCreation.resx">
       <DependentUpon>201702041855563_InitialCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContext\IdentityMigrations\201702042002444_identitySchema.resx">
+      <DependentUpon>201702042002444_identitySchema.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

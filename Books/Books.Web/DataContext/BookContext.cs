@@ -10,10 +10,17 @@ namespace Books.Web.DataContext
 {
     public class BookContext : DbContext
     {
+        public DbSet<Book> Books { get; set; }
+
         public BookContext() : base("DefaultConnection")
         {
             Database.Log = sql => Debug.WriteLine(sql);
         }
-        public DbSet<Book> Books { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("library");
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
