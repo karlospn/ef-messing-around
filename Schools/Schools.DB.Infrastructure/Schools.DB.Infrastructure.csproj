@@ -88,6 +88,8 @@
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ISchoolRepository.cs" />
+    <Compile Include="Repository\SchoolRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
