@@ -40,10 +40,6 @@ namespace Schools.DB.Infrastructure.Repository
             try
             {
                 _context.Students.Add(student);
-                //if (student.StudentAddress != null)
-                //{
-                //    _context.StudentAddresses.Add(student.StudentAddress);
-                //}
                 LogEntitiesState();
                 _context.SaveChangesAsync();
             }
@@ -56,11 +52,20 @@ namespace Schools.DB.Infrastructure.Repository
 
         public void UpdateStudentAsync(Student student)
         {
-            //_context.Students.AddOrUpdate(student);
-            _context.Entry(student).State = EntityState.Modified;
-            LogEntitiesState();
+
+            var currentStudent = _context.Students.Local.FirstOrDefault(x => x.StudentID == student.StudentID);
+            if (currentStudent != null)
+            {
+                _context.Entry(currentStudent).CurrentValues.SetValues(student);
+            }
+            else
+            {
+                _context.Students.Add(student);
+            }
+
             _context.SaveChangesAsync();
         }
+
 
         private void LogEntitiesState()
         {

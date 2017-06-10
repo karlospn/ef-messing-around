@@ -55,7 +55,9 @@ namespace Schools.Models
                 {
                     Address1 = RandomString(randomLength),
                     City = RandomString(randomLength),
-                    State = RandomString(randomLength)
+                    State = RandomString(randomLength),
+                    Student = newStudent,
+                    
                 };
             }
             return newStudent;
