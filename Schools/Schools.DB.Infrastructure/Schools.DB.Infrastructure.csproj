@@ -51,15 +51,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\Course.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\GetCoursesByStudentId_Result.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\School.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>School.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\School.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\School.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>School.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Standard.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Student.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\StudentAddress.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Teacher.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\View_StudentCourse.cs">
+      <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +94,12 @@
     <Content Include="Context\School.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>School.Context.cs</LastGenOutput>
+      <DependentUpon>School.edmx</DependentUpon>
+    </Content>
+    <Content Include="Context\School.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>School.edmx</DependentUpon>
+      <LastGenOutput>School.cs</LastGenOutput>
     </Content>
     <Content Include="Database\SchoolDB.sql" />
   </ItemGroup>

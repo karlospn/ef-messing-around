@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schools", "Schools\Schools.csproj", "{3C9235A7-C6C6-4CC5-946C-2F1B8C7C43DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schools.DB.Infrastructure", "Schools.DB.Infrastructure\Schools.DB.Infrastructure.csproj", "{1B3E7CB4-F996-4B31-9F56-6645B496E141}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3C9235A7-C6C6-4CC5-946C-2F1B8C7C43DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C9235A7-C6C6-4CC5-946C-2F1B8C7C43DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C9235A7-C6C6-4CC5-946C-2F1B8C7C43DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B3E7CB4-F996-4B31-9F56-6645B496E141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B3E7CB4-F996-4B31-9F56-6645B496E141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B3E7CB4-F996-4B31-9F56-6645B496E141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B3E7CB4-F996-4B31-9F56-6645B496E141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
