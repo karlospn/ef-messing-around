@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RefactorThis.GraphDiff;
 using Schools.DB.Infrastructure.Context;
 
 namespace Schools.DB.Infrastructure.Repository
@@ -52,16 +53,18 @@ namespace Schools.DB.Infrastructure.Repository
 
         public void UpdateStudentAsync(Student student)
         {
-
-            var currentStudent = _context.Students.Local.FirstOrDefault(x => x.StudentID == student.StudentID);
-            if (currentStudent != null)
-            {
-                _context.Entry(currentStudent).CurrentValues.SetValues(student);
-            }
-            else
-            {
-                _context.Students.Add(student);
-            }
+            _context.UpdateGraph<Student>(student,
+                map =>
+                    map.OwnedEntity(x => x.StudentAddress).OwnedEntity(x => x.Standard).OwnedCollection(x => x.Courses));
+            //var currentStudent = _context.Students.Local.FirstOrDefault(x => x.StudentID == student.StudentID);
+            //if (currentStudent != null)
+            //{
+            //    _context.Entry(currentStudent).CurrentValues.SetValues(student);
+            //}
+            //else
+            //{
+            //    _context.Students.Add(student);
+            //}
 
             _context.SaveChangesAsync();
         }
