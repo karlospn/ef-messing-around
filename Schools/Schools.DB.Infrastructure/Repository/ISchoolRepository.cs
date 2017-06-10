@@ -11,5 +11,7 @@ namespace Schools.DB.Infrastructure.Repository
     {
         List<Student> GetStudents();
         Task<List<Student>> GetStudentsAsync();
+        void AddStudentAsync(Student student);
+        void UpdateStudentAsync(Student student);
     }
 }

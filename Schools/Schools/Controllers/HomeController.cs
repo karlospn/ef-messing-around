@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Schools.DB.Infrastructure.Context;
 using Schools.DB.Infrastructure.Repository;
+using Schools.Models;
 
 namespace Schools.Controllers
 {
@@ -19,7 +21,6 @@ namespace Schools.Controllers
 
         public async Task<ActionResult> Index()
         {
-            //var students = _schoolRepository.GetStudents();
             var students = await _schoolRepository.GetStudentsAsync();
             return View(students);
         }
@@ -36,6 +37,16 @@ namespace Schools.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        private void AddComposedStudent()
+        {
+            _schoolRepository.AddStudentAsync(StudentBuilder.CreateStudent(true, true, true, 10));
+        }
+
+        private void EditComposedStudent()
+        {
+            _schoolRepository.UpdateStudentAsync(StudentBuilder.EditStudent(13, true, true, true, 10));
         }
     }
 }
