@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandInterceptor.cs" />
     <Compile Include="Context\Course.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
@@ -103,11 +104,16 @@
     <Compile Include="Context\Teacher.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\TeacherType.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\View_StudentCourse.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\TeachersRepository.cs" />
     <Compile Include="Repository\CoursesRepository.cs" />
+    <Compile Include="Repository\ITeachersRepository.cs" />
     <Compile Include="Repository\ICoursesRepository.cs" />
     <Compile Include="Repository\ISchoolRepository.cs" />
     <Compile Include="Repository\SchoolRepository.cs" />

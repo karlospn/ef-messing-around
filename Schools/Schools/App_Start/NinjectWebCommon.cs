@@ -65,6 +65,7 @@ namespace Schools.App_Start
         {
             kernel.Bind<ISchoolRepository>().To<SchoolRepository>();
             kernel.Bind<ICoursesRepository>().To<CoursesRepository>();
+            kernel.Bind<ITeachersRepository>().To<TeachersRepository>();
         }        
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SchoolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SchoolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="CourseId" />
@@ -56,6 +56,7 @@
           <Property Name="TeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TeacherName" Type="varchar" MaxLength="50" />
           <Property Name="StandardId" Type="int" />
+          <Property Name="TeacherType" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SchoolDB.dbo.View_StudentCourse' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -206,8 +207,7 @@ warning 6002: The table/view 'SchoolDB.dbo.View_StudentCourse' does not have a p
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchoolDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -264,6 +264,7 @@ warning 6002: The table/view 'SchoolDB.dbo.View_StudentCourse' does not have a p
           <Property Name="StandardId" Type="Int32" />
           <NavigationProperty Name="Courses" Relationship="Self.FK_Course_Teacher" FromRole="Teacher" ToRole="Course" />
           <NavigationProperty Name="Standard" Relationship="Self.FK_Teacher_Standard" FromRole="Teacher" ToRole="Standard" />
+          <Property Name="TeacherType" Type="SchoolDBModel.TeacherType" />
         </EntityType>
         <EntityType Name="View_StudentCourse">
           <Key>
@@ -363,10 +364,10 @@ warning 6002: The table/view 'SchoolDB.dbo.View_StudentCourse' does not have a p
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
           <FunctionImport Name="GetCoursesByStudentId" ReturnType="Collection(SchoolDBModel.GetCoursesByStudentId_Result)">
-            <Parameter Name="StudentId" Mode="In" Type="Int32" />
+          <Parameter Name="StudentId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_DeleteStudent">
-            <Parameter Name="StudentId" Mode="In" Type="Int32" />
+          <Parameter Name="StudentId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertStudentInfo" ReturnType="Collection(Decimal)">
             <Parameter Name="StandardId" Mode="In" Type="Int32" />
@@ -383,6 +384,11 @@ warning 6002: The table/view 'SchoolDB.dbo.View_StudentCourse' does not have a p
           <Property Type="String" Name="coursename" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="TeacherId" Nullable="true" />
         </ComplexType>
+        <EnumType Name="TeacherType">
+          <Member Name="Permanent" Value="1" />
+          <Member Name="Contract" Value="2" />
+          <Member Name="Guest" Value="3" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -417,6 +423,13 @@ warning 6002: The table/view 'SchoolDB.dbo.View_StudentCourse' does not have a p
                 <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SchoolDBModel.Student">
+              <ModificationFunctionMapping>
+                <DeleteFunction FunctionName="SchoolDBModel.Store.sp_DeleteStudent" >
+                  <ScalarProperty Name="StudentID" ParameterName="StudentId" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudentAddresses">
             <EntityTypeMapping TypeName="SchoolDBModel.StudentAddress">
@@ -432,6 +445,7 @@ warning 6002: The table/view 'SchoolDB.dbo.View_StudentCourse' does not have a p
           <EntitySetMapping Name="Teachers">
             <EntityTypeMapping TypeName="SchoolDBModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="TeacherType" ColumnName="TeacherType" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
                 <ScalarProperty Name="StandardId" ColumnName="StandardId" />

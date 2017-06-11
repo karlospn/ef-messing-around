@@ -87,6 +87,17 @@ namespace Schools.DB.Infrastructure.Repository
             }
         }
 
+        //Using sp_DeleteStudent mapping
+        public void DeleteStudentAsync(int id)
+        {
+            var student = _context.Students.FirstOrDefault(x => x.StudentID == id);
+            if (student != null)
+            {
+                _context.Students.Remove(student);
+                _context.SaveChangesAsync();
+            }
+        }
+
         private void LogEntitiesState()
         {
             foreach (var entity in _context.ChangeTracker.Entries())

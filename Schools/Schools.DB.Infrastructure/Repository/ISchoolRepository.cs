@@ -14,6 +14,7 @@ namespace Schools.DB.Infrastructure.Repository
         void AddStudentAsync(Student student);
         void UpdateStudentAndDependenciesAsync(Student student);
         void UpdateStudentAsync(Student student);
+        void DeleteStudentAsync(int id);
 
     }
 }

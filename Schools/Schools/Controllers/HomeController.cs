@@ -22,7 +22,7 @@ namespace Schools.Controllers
         public async Task<ActionResult> Index()
         {
             var students = await _schoolRepository.GetStudentsAsync();
-            EditSimpleStudent();
+            DeleteStudent();
             return View(students);
         }
 
@@ -53,6 +53,11 @@ namespace Schools.Controllers
         private void EditSimpleStudent()
         {
             _schoolRepository.UpdateStudentAsync(StudentBuilder.EditStudent(7, false, false, false, 8));
+        }
+
+        private void DeleteStudent()
+        {
+            _schoolRepository.DeleteStudentAsync(9);
         }
     }
 }
