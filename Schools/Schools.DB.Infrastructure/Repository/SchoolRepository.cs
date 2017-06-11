@@ -50,25 +50,42 @@ namespace Schools.DB.Infrastructure.Repository
                 throw;
             }          
         }
-
-        public void UpdateStudentAsync(Student student)
+        public void UpdateStudentAndDependenciesAsync(Student student)
         {
             _context.UpdateGraph<Student>(student,
                 map =>
                     map.OwnedEntity(x => x.StudentAddress).OwnedEntity(x => x.Standard).OwnedCollection(x => x.Courses));
-            //var currentStudent = _context.Students.Local.FirstOrDefault(x => x.StudentID == student.StudentID);
-            //if (currentStudent != null)
-            //{
-            //    _context.Entry(currentStudent).CurrentValues.SetValues(student);
-            //}
-            //else
-            //{
-            //    _context.Students.Add(student);
-            //}
-
             _context.SaveChangesAsync();
         }
 
+        private void UpdateStudentAddress(Student student, Student currentStudent)
+        {
+            if (currentStudent.StudentAddress != null)
+            {
+                if (student.StudentAddress != null)
+                {
+                    student.StudentAddress.StudentID = currentStudent.StudentAddress.StudentID;
+                    _context.Entry(currentStudent.StudentAddress).CurrentValues.SetValues(student.StudentAddress);
+                }
+            }
+            else
+            {
+                if (student.StudentAddress != null)
+                {
+                    _context.StudentAddresses.Add(student.StudentAddress);
+                }
+            }
+        }
+
+        public void UpdateStudentAsync(Student student)
+        {
+            var std = _context.Students.FirstOrDefault(x => x.StudentID == student.StudentID);
+            if (std != null)
+            {
+                std.StudentName = student.StudentName;
+                _context.SaveChangesAsync();
+            }
+        }
 
         private void LogEntitiesState()
         {
@@ -83,6 +100,5 @@ namespace Schools.DB.Infrastructure.Repository
                 Debug.WriteLine($"Entity State: {entity.State}");
             }
         }
-
     }
 }

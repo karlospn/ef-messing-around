@@ -64,6 +64,7 @@ namespace Schools.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<ISchoolRepository>().To<SchoolRepository>();
+            kernel.Bind<ICoursesRepository>().To<CoursesRepository>();
         }        
     }
 }

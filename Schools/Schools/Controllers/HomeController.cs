@@ -22,7 +22,7 @@ namespace Schools.Controllers
         public async Task<ActionResult> Index()
         {
             var students = await _schoolRepository.GetStudentsAsync();
-            EditComposedStudent();
+            EditSimpleStudent();
             return View(students);
         }
 
@@ -47,7 +47,12 @@ namespace Schools.Controllers
 
         private void EditComposedStudent()
         {
-            _schoolRepository.UpdateStudentAsync(StudentBuilder.EditStudent(6, true, true, true, 10));
+            _schoolRepository.UpdateStudentAndDependenciesAsync(StudentBuilder.EditStudent(7, true, true, true, 8));
+        }
+
+        private void EditSimpleStudent()
+        {
+            _schoolRepository.UpdateStudentAsync(StudentBuilder.EditStudent(7, false, false, false, 8));
         }
     }
 }
